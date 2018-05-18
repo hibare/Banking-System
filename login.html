@@ -1,0 +1,80 @@
+<html>
+	<head>
+		<title>Banking system</title>
+		<script>
+			function checkAllLogin(){
+					if(checkUIDLogin() && checkPWDLogin())
+						return true;
+					else
+						return false;
+			}
+			function checkUIDLogin(){
+				if(document.fLogin.uid.value.length == 0){
+					document.getElementById("uidErrLogin").innerText=" * UserID required";
+					return false;
+				}else{
+					document.getElementById("uidErrLogin").innerText="";
+					return true;
+				}
+			}
+			
+			function checkPWDLogin(){
+				if(document.fLogin.pwd.value.length == 0){
+					document.getElementById("pwdErrLogin").innerText=" * Password should not be empty";
+					return false;
+				}else if(document.fLogin.pwd.value.length <6 || document.fLogin.pwd.value.length >16){
+					document.getElementById("pwdErrLogin").innerText=" * Password should be between 6 and 16 characters";
+				}else{
+					document.getElementById("pwdErrLogin").innerText="";
+					return true;
+				}
+			}
+			
+		</script>
+	</head>
+	
+	<body>
+		<center>
+			<img src="bank.jpg" height="150px" width="180px"/><br/><br/>
+			<a href="index.html">Home</a>&nbsp;
+			<a href="net.html">Netbanking</a>&nbsp;
+			<a href="loan.html">Loan</a>&nbsp;
+			<a href="deposit.html">Deposit</a>&nbsp;
+			<a href="about.html">About</a>&nbsp;
+			<a href="contact.html">Contact</a>&nbsp;
+			<br/>
+			<br/><h2>Net Banking - Login</h2>
+			<h4 style="color:red">Our bank never asks for confidential information such as PIN and OTP from customers<br/>
+			Any such call can be made by a fraudster. Please do not share personal info.</h4>
+			<br/>
+			<form action="#" method="post" name="fLogin" onSubmit="return checkAllLogin();">
+				<table>
+					<tr>
+						<td>UserID</td>
+						<td><input type="text" name="uid" onKeyUp="checkUIDLogin();" onChange="checkUIDLogin();" required/><span id="uidErrLogin"> * UserID required</span></td>
+					</tr>
+					<tr>
+						<td>Password</td>
+						<td><input type="password" name="pwd" onKeyUp="checkPWDLogin();" onChange="checkPWDLogin();" required/><span id="pwdErrLogin"> * Password required</span></td>
+					</tr>
+					<tr>
+						<td><br/></td>
+						<td><br/></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><input type="submit" value="Login" onClick="checkAllLogin();"/>&nbsp;&nbsp;<input type="reset" value="Clear"/></td>
+					</tr>
+				
+				</table>
+			</form>
+		</center>
+		
+	</body>
+
+
+
+</html>
+
+
+

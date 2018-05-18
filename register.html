@@ -1,0 +1,171 @@
+<html>
+	<head>
+		<title>Banking system</title>
+		<script>
+			function checkAll(){
+					if(checkUID() && checkPWD() && checkAge() && checkEmail() && checkName() && checkPhone() && checkCPWD())
+						return true;
+					else
+						return false;
+			}
+			
+			function checkName(){
+				if(document.f1.name.value.length == 0){
+					document.getElementById("nameErr").innerText=" * Name should not be empty";
+					return false;
+				}else{
+					document.getElementById("nameErr").innerText="";
+					return true;
+				}
+			}
+			
+			function checkUID(){
+				if(document.f1.uid.value.length == 0){
+					document.getElementById("UIDErr").innerText=" * User ID should not be empty";
+					return false;
+				}else{
+					document.getElementById("UIDErr").innerText="";
+					return true;
+				}
+			}
+			
+			function checkPWD(){
+				if(document.f1.pwd.value.length == 0){
+					document.getElementById("pwdErr").innerText=" * Password should not be empty";
+					return false;
+				}else if(document.f1.pwd.value.length <6 || document.f1.pwd.value.length >16){
+					document.getElementById("pwdErr").innerText=" * Password should be between 6 and 16 characters";
+				}else if(document.f1.pwd.value.length >=6 && document.f1.pwd.value.length <=10){
+					document.getElementById("pwdErr").innerText=" * Strength: Poor";
+				}else{
+					document.getElementById("pwdErr").innerText=" * Strength: Strong";
+					return true;
+				}
+			}
+			
+			function checkCPWD(){
+				if(document.f1.cpwd.value.length == 0){
+					document.getElementById("cpwdErr").innerText=" * Password should not be empty";
+					return false;
+				}else if(document.f1.pwd.value != document.f1.cpwd.value){
+					document.getElementById("cpwdErr").innerText=" * Password mismatch";
+				}else {
+					document.getElementById("cpwdErr").innerText=" * Password matched";
+					return true;
+				}
+			}
+			
+			function checkAge(){
+				if(document.f1.age.value.length == 0){
+					document.getElementById("ageErr").innerText=" * Age should not be empty";
+					return false;
+				}else if(isNaN(document.f1.age.value) || !((parseInt(document.f1.age.value)>=21) && (parseInt(document.f1.age.value)<95))){
+					document.getElementById("ageErr").innerText=" * Age should be a number and between 21 - 95";
+					return false;
+				}else {
+					document.getElementById("ageErr").innerText="";
+					return true;
+				}
+			}
+			function checkEmail(){
+				if(document.f1.email.value.length == 0){
+					document.getElementById("emailErr").innerText=" * Email should not be empty";
+					return false;
+				}else{
+					document.getElementById("emailErr").innerText="";
+					return true;
+				}
+			}
+			
+			function checkPhone(){
+				if(document.f1.phone.value.length == 0){
+					document.getElementById("phoneErr").innerText=" * Phone number should not be empty";
+					return false;
+				}else if(isNaN(document.f1.phone.value) || !(document.f1.phone.value.length == 10)){
+					document.getElementById("phoneErr").innerText=" * Phone number should be a number and is equal to 10 digits";
+					return false;
+				}else{
+					document.getElementById("phoneErr").innerText="";
+					return true;
+				}
+			}
+			function checkGender(){
+				if(document.f1.gender.value.length == 0){
+					document.getElementById("genderErr").innerText=" * Select a gender";
+					return false;
+				}else{
+					document.getElementById("genderErr").innerText="";
+					return true;
+				}
+			}
+		</script>
+	</head>
+	
+	<body>
+		<center>
+			<img src="bank.jpg" height="150px" width="180px"/><br/><br/>
+			<a href="index.html">Home</a>&nbsp;
+			<a href="net.html">Netbanking</a>&nbsp;
+			<a href="loan.html">Loan</a>&nbsp;
+			<a href="deposit.html">Deposit</a>&nbsp;
+			<a href="about.html">About</a>&nbsp;
+			<a href="contact.html">Contact</a>&nbsp;
+			<br/>
+			<br/><h2>Net Banking - Register</h2>
+			<h4 style="color:red">Our bank never asks for confidential information such as PIN and OTP from customers<br/>
+			Any such call can be made by a fraudster. Please do not share personal info.</h4>
+			<br/>
+			<form action="#" method="post" name="f1" onSubmit="return checkAll();">
+				<table>
+					<tr>
+						<td>Name</td>
+						<td><input type="text" name="name" onKeyUp="checkName();" onChange="checkName();" required/><span id="nameErr"> * Name should not be empty</span></td>
+					</tr>
+					<tr>
+						<td>User ID</td>
+						<td><input type="text" name="uid" onKeyUp="checkUID();" onChange="checkUID();" required/><span id="UIDErr"> * UserID should not be empty</span></td>
+					</tr>
+					<tr>
+						<td>Password</td>
+						<td><input type="password" name="pwd" onKeyUp="checkPWD();" onChange="checkPWD();" required/><span id="pwdErr"> * Password should not be empty</span></td>
+					</tr>
+					<tr>
+						<td>Confirm password</td>
+						<td><input type="password" name="cpwd" onKeyUp="checkCPWD();" onChange="checkCPWD();" required/><span id="cpwdErr"> * Confirm Password should not be empty</span></td>
+					</tr>
+					<tr>
+						<td>Age</td>
+						<td><input type="text" name="age" onKeyUp="checkAge();" onChange="checkAge();" required/><span id="ageErr"> * Age should not be empty</span></td>
+					</tr>
+					<tr>
+						<td>Email</td>
+						<td><input type="email" name="email" onKeyUp="checkEmail();" onChange="checkEmail();" required/><span id="emailErr"> * Email should not be empty</span></td>
+					</tr>
+					<tr>
+						<td>Phone</td>
+						<td><input type="text" name="phone" onKeyUp="checkPhone();" onChange="checkPhone();" required/><span id="phoneErr"> * Phone number should not be empty</span></td>
+					</tr>
+					<tr>
+						<td>Gender</td>
+						<td><input type="radio" name="gender" value="male" onClick="checkGender();"/>Male &nbsp;<input type="radio" name="gender" value="female" onClick="checkGender();"/>Female <span id="genderErr"> * Select a gender</span></td>
+					</tr>
+					<tr>
+						<td><br/></td>
+						<td><br/></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><input type="submit" value="Register" />&nbsp;&nbsp;<input type="reset" value="Clear"/></td>
+					</tr>
+				</table>
+			</form>
+		</center>
+		
+	</body>
+
+
+
+</html>
+
+
+

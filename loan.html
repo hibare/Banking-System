@@ -1,0 +1,144 @@
+<html>
+	<head>
+		<title>Banking system</title>
+		<script>
+			function calLoan(){
+				if(!checkAllLoan())
+						return;
+						
+				var loanType=document.f1Loan.typeLoan.value;
+				
+				if(loanType == "hl"){
+					var oRate=10;
+					var rate=10/100;
+					var amt=parseFloat(document.f1Loan.amtLoan.value);
+					var years=parseInt(document.f1Loan.yearsLoan.value);
+					
+					var emi=(amt*rate*Math.pow((1+rate), (years*12)))/(Math.pow((1+rate), (years*12))-1);
+					document.getElementById("emi").innerText=emi;
+					
+				}else if(loanType == "cl"){
+					var oRate=11;
+					var rate=11/100;
+					var amt=parseFloat(document.f1Loan.amtLoan.value);
+					var years=parseInt(document.f1Loan.yearsLoan.value);
+					
+					var emi=(amt*rate*Math.pow((1+rate), (years*12)))/(Math.pow((1+rate), (years*12))-1);
+					document.getElementById("emi").innerText=emi;
+
+				}else if(loanType == "pl"){
+					var oRate=8;
+					var rate=8/100;
+					var amt=parseFloat(document.f1Loan.amtLoan.value);
+					var years=parseInt(document.f1Loan.yearsLoan.value);
+					
+					var emi=(amt*rate*Math.pow((1+rate), (years*12)))/(Math.pow((1+rate), (years*12))-1);
+					document.getElementById("emi").innerText=emi;
+				}
+			}
+			
+			function checkAllLoan(){
+					if(checkTypeLoan() && checkAmtLoan() && checkYearsLoan() && checkRateLoan())
+						return true;
+					else
+						return false;
+			}
+			
+			function checkTypeLoan(){
+					if(document.f1Loan.typeLoan.value.length == 0){
+						document.getElementById("typeLoanErr").innerText=" * Required";
+						return false;
+					}else{
+						var loanType = document.f1Loan.typeLoan.value;
+						if(loanType == "hl")
+							document.f1Loan.interestLoan.value=10;
+						else if(loanType == "cl")
+							document.f1Loan.interestLoan.value=11;	
+						else if(loanType == "pl")
+							document.f1Loan.interestLoan.value=8;
+						document.getElementById("typeLoanErr").innerText="";
+						return true;
+					}
+			}
+			
+			function checkAmtLoan(){
+					if(isNaN(document.f1Loan.amtLoan.value) || document.f1Loan.amtLoan.value.length==0){
+						document.getElementById("amtLoanErr").innerText=" * Amount required and should be a number";
+						return false;
+					}else{
+						document.getElementById("amtLoanErr").innerText="";
+						return true;
+					}
+			}
+			
+			function checkYearsLoan(){
+					if(isNaN(document.f1Loan.yearsLoan.value) || document.f1Loan.yearsLoan.value.length==0){
+						document.getElementById("yearsLoanErr").innerText=" * Year required and should be a number";
+						return false;
+					}else{
+						document.getElementById("yearsLoanErr").innerText="";
+						return true;
+					}
+			}
+			
+			function checkRateLoan(){
+					if(isNaN(document.f1Loan.interestLoan.value) || document.f1Loan.interestLoan.value.length==0){
+						alert("Enter valid interest");
+						return false;
+					}else
+						return true;
+			}
+		</script>
+	</head>
+	
+	<body>
+		<center>
+			<img src="bank.jpg" height="150px" width="180px"/><br/><br/>
+			<a href="index.html">Home</a>&nbsp;
+			<a href="net.html">Netbanking</a>&nbsp;
+			<a href="loan.html">Loan</a>&nbsp;
+			<a href="deposit.html">Deposit</a>&nbsp;
+			<a href="about.html">About</a>&nbsp;
+			<a href="contact.html">Contact</a>&nbsp;
+			<br/>
+			<h2>Loan</h2>
+			
+			<form action="#" method="post" name="f1Loan">
+				<table>
+					<tr>
+						<td>Type of loan</td>
+						<td>
+							<input type="radio" name="typeLoan" value="hl" onClick="checkTypeLoan();">Home Loan <input type="radio" name="typeLoan" value="cl" onClick="checkTypeLoan();">Car loan <input type="radio" name="typeLoan" value="pl" onClick="checkTypeLoan();">Personal Loan <span id="typeLoanErr"> * Required</span>
+						</td>
+					</tr>
+					<tr>
+						<td>Loan amount</td>
+						<td><input type="text" name="amtLoan" onKeyUp="checkAmtLoan();" onChange="checkAmtLoan();" required/><span id="amtLoanErr"> * Amount required</span></td>
+					</tr>
+					<tr>
+						<td>Years</td>
+						<td><input type="text" name="yearsLoan"  onKeyUp="checkYearsLoan();" onChange="checkYearsLoan()" required/><span id="yearsLoanErr"> * Year required</span></td>
+					</tr>
+					<tr>
+						<td>Interest</td>
+						<td><input type="text" name="interestLoan"  onKeyUp="checkRateLoan();" onChange="checkRateLoan();" required readonly/></td>
+					</tr>
+					<tr>
+						<td>EMI</td>
+						<td><b>Rs. </b><b id="emi">0</b></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><input type="button" value="Calulate" onClick="calLoan()"/>&nbsp;&nbsp;<input type="reset" value="Clear"/></td>
+					</tr>
+				
+				</table>
+			</form>
+			
+		</center>
+		
+	</body>
+
+
+
+</html>
